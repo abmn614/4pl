@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>我的货架</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="../css/style.css">
+<!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+<!-- 头部导航条｛ -->
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="brand">Project name</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another Action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li class="nav-header">New header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav pull-right">
+                    <li><a href="#">个人资料</a></li>
+                    <li><a href="#">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 头部导航条｝ -->
+    
+<!-- 主要内容｛ -->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!-- 左侧导航菜单｛ -->
+        <div class="span2">
+                    <div class="sidebar-menu">
+                        <a href="#" class="nav-header menu-first collapsed first-child" data-toggle="collapse" data-target="#user"><i class="icon-user"></i> 用户管理</a>
+                        <ul id="user" class="nav nav-list collapse menu-second">
+                            <li><a href="#"><i class="icon-plus"></i> 增加用户</a></li>
+                            <li class="selected"><a href="#"><i class="icon-edit"></i> 资料修改</a></li>
+                            <li><a href="#"><i class="icon-ok"></i> 用户认证</a></li>
+                        </ul>
+                        <a href="#" class="nav-header menu-first collapsed" data-toggle="collapse" data-target="#cangku"><i class="icon-th-large"></i> 仓库管理</a>
+                        <ul id="cangku" class="nav nav-list collapse menu-second">
+                            <li><a href="#"><i class="icon-plus"></i> 添加仓库</a></li>
+                            <li><a href="#"><i class="icon-edit"></i> 修改仓库</a></li>
+                        </ul>
+                        <a href="#" class="nav-header menu-first collapsed" data-toggle="collapse" data-target="#huojia"><i class="icon-th"></i> 我的货架</a>
+                        <ul id="huojia" class="nav nav-list collapse menu-second">
+                            <li><a href="#"><i class="icon-th-list"></i> 管理货架</a></li>
+                            <li><a href="#"><i class="icon-download-alt"></i> 购买货架</a></li>
+                        </ul>
+                        <a href="#" class="nav-header menu-first collapsed" data-toggle="collapse" data-target="#product"><i class="icon-shopping-cart"></i> 我的产品</a>
+                        <ul id="product" class="nav nav-list collapse menu-second">
+                            <li><a href="#"><i class="icon-plus"></i> 添加产品</a></li>
+                            <li><a href="#"><i class="icon-edit"></i> 修改产品</a></li>
+                        </ul>
+                        <a href="#" class="nav-header menu-first collapsed" data-toggle="collapse" data-target="#kucun"><i class="icon-inbox"></i> 库存管理</a>
+                        <ul id="kucun" class="nav nav-list collapse menu-second">
+                            <li><a href="#"><i class="icon-circle-arrow-up"></i> 产品入库</a></li>
+                            <li><a href="#"><i class="icon-ok-circle"></i> 入库审核</a></li>
+                            <li><a href="#"><i class="icon-circle-arrow-down"></i> 产品出库</a></li>
+                            <li><a href="#"><i class="icon-ok-circle"></i> 出库审核</a></li>
+                        </ul>
+                        <a href="#" class="nav-header menu-first collapsed last-child" data-toggle="collapse" data-target="#caiwu"><i class="icon-star"></i> 财务管理</a>
+                        <ul id="caiwu" class="nav nav-list collapse menu-second">
+                            <li><a href="#"><i class="icon-plus"></i> 账户充值</a></li>
+                            <li><a href="#"><i class="icon-ok-circle"></i> 充值审核</a></li>
+                            <li><a href="#"><i class="icon-minus"></i> 账户提现</a></li>
+                            <li><a href="#"><i class="icon-ok-circle"></i> 提现审核</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+        <!-- <div class="well span2 pull-left">
+            <ul class="nav nav-list">
+                <li><a href="#"><i class="icon-home"> </i> 首页</a></li>
+                <li class="active">
+                    <a href="#" class="collapsed" data-toggle="collapse" data-target=".collapse"><i class="icon-user"> </i> 用户管理 </a>
+                    <ul class="second nav collapse">
+                        <li><a href="#">Item 1</a></li>
+                        <li class="active"><a href="#">Item 2</a></li>
+                        <li><a href="#">Item 3</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><i class="icon-th"> </i> 货架管理</a></li>
+                <li><a href="#"><i class="icon-shopping-cart"> </i> 产品管理</a></li>
+                <li><a href="#"><i class="icon-inbox"> </i> 库存管理</a></li>
+                <li><a href="#"><i class="icon-star"> </i> 财务管理</a></li>
+            </ul>
+        </div> -->
+        <!-- 左侧导航菜单｝ -->
+        <!-- 右侧内容｛ -->
+        <div class="span10 pull-right right">
+            <!-- 面包屑｛ -->
+            <ul class="breadcrumb clearfix">
+                <li><a href="#"><i class="icon-home"> </i> 首页</a><span class="divider"> / </span></li>
+                <li>我的货架</li>
+            </ul>
+            <!-- 面包屑｝ -->
+
+            <!-- 货架信息｛ -->
+            <p class="lead"><strong>广州仓库：</strong><span class="pull-right"><a href="#" class="btn btn-primary">管理货架</a> <a href="#" class="btn btn-primary">购买货架</a></span></p>
+            <p class="shelf-info">
+                <span>总货架：3</span>
+                <span>总货位：36</span>
+                <span>已用货架：1</span>
+                <span>已用货位：3</span>
+                <span>剩余货架：2</span>
+                <span>剩余货位：33（<strong class="text-success">充足</strong>）</span>
+            </p>
+            <!-- 货架信息｝ -->
+
+            <!-- 我的货架｛ -->
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="" data-toggle="tab" data-target="#no1">货架001</a></li>
+                <li><a href="" data-toggle="tab" data-target="#no2">货架002</a></li>
+                <li><a href="" data-toggle="tab" data-target="#no3">货架003</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="no1">
+                    <table class="table table-striped table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th width="5%">货位</th>
+                                <th>产品</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>产品1(20)，产品2(30)，产品3(60)</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>产品1(20)，产品2(30)</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>产品1(20)，产品2(30)，产品3(60)</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+                <div class="tab-pane" id="no2">
+                    <table class="table table-striped table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th width="5%">货位</th>
+                                <th>产品</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+                <div class="tab-pane" id="no3">
+                    <table class="table table-striped table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th width="5%">货位</th>
+                                <th>产品</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>02</td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+            <!-- 我的货架｝ -->
+
+        </div>
+        <!-- 右侧内容｝ -->
+    </div>
+</div>
+<!-- 主要内容｝ -->
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>
