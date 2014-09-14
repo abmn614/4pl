@@ -47,8 +47,28 @@ $vcode_session = strtolower($_SESSION['vcode']);
 <![endif]-->
 </head>
 <body>
-
-
+<!-- 语言切换 -->
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.php" class="brand">第四方仓储管理系统</a>
+            <ul class='nav pull-right'>
+                <li class='dropdown'>
+                    <a href='#' class='dropdown-toggle' data-toggle='dropdown'><?=$lang['语言']?><span class='caret'></span></a>
+                    <ul class='dropdown-menu' role='menu'>
+                        <li><a href='?lang=zh-cn'>中文</a></li>
+                        <li><a href='?lang=en'>English</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 <?php
  // 插入到数据库
@@ -56,7 +76,7 @@ $vcode_session = strtolower($_SESSION['vcode']);
         // 实例化user表
         $user = M('user');
         if ($user->where("username='{$insert['username']}'")->field('*')->select()) {
-                echo "<script>alert('该用户名已存在！');</script>";
+                echo "<script>alert('{$lang['该用户名已存在']}！');</script>";
                 $_SESSION['username'] = ''; // 清空session里的用户名
         }else{
             if (!empty($_POST)) {
@@ -69,27 +89,21 @@ $vcode_session = strtolower($_SESSION['vcode']);
                         $insert_log['content'] = "新用户注册，注册ID为".$userid;
                         $log->insert($insert_log);
 
-                        echo "<script>alert('注册成功！');</script>";
+                        echo "<script>alert('{$lang['注册成功']}！');</script>";
                         echo "<script>location='login.php';</script>";
                     }else{
-                        echo "<script>alert('注册失败！');</script>";
+                        echo "<script>alert('{$lang['注册失败']}！');</script>";
                     }
                 }else{
-                    echo "<script>alert('验证码错误！');</script>";
+                    echo "<script>alert('{$lang['验证码错误']}！');</script>";
                 }
             }
             
         }
     }else{
-        echo "<script>alert('两次输入密码不一致！');</script>";
+        echo "<script>alert('{$lang['两次输入的密码不一致']}！');</script>";
     }
  ?>
-
-<!-- 语言切换 -->
-<div class="btn-group center">
-    <a href="?lang=zh-cn" class="btn">中文</a>
-    <a href="?lang=en" class="btn">English</a>
-</div>
 
 <!-- 用户注册｛ -->
 <div class="container reg">

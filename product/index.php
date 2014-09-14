@@ -1,5 +1,16 @@
 <?php 
 session_start();
+
+// 判断网站语言
+if ($_GET['lang']) {
+    $_SESSION['lang'] = $_GET['lang'];
+} else {
+    if (!isset($_SESSION['lang'])) {
+        $_SESSION['lang'] = 'zh-cn';
+    }
+}
+include("../lang/lang.php");
+
 include('../class/config.inc.php');
 include('../class/model.class.php');
 include('../class/page.class.php');
@@ -10,7 +21,7 @@ include('../class/page.class.php');
 <html>
 <head>
 <meta charset="UTF-8">
-<title>我的产品</title>
+<title><?=$lang['我的产品']?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -41,16 +52,16 @@ include('../header.php');
         <div class="span10 pull-right right">
             <!-- 面包屑｛ -->
             <ul class="breadcrumb clearfix">
-                <li><a href="#"><i class="icon-home"> </i> 首页</a><span class="divider"> / </span></li>
-                <li>我的产品</li>
+                <li><a href="../index.php"><i class="icon-home"> </i> <?=$lang['首页']?></a><span class="divider"> / </span></li>
+                <li><?=$lang['我的产品']?></li>
             </ul>
             <!-- 面包屑｝ -->
 
             <!-- 产品一级分类｛ -->
             <div class="btn-group">
-                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">选择产品分类 <span class="caret"></span></a>
+                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><?=$lang['产品分类']?> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href='index.php'>全部产品</a></li>
+                    <li><a href='index.php'><?=$lang['全部产品']?></a></li>
                     <?php 
                         $pclass = M('pclass');
                         $pclass_info = $pclass->field('*')->select();
@@ -65,7 +76,7 @@ include('../header.php');
                 </ul>
             </div>
             <span class="pull-right">
-                <a href="add.php" class="btn btn-primary">添加产品</a>
+                <a href="add.php" class="btn btn-primary"><?=$lang['添加产品']?></a>
             </span>
             <br><br>
             <!-- 产品一级分类｝ -->
@@ -75,17 +86,17 @@ include('../header.php');
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>分类</th>
-                        <th>产品ID</th>
-                        <th>产品名称</th>
-                        <th>产品图片</th>
-                        <th>单重</th>
-                        <th>单价</th>
-                        <th>规格</th>
-                        <th>颜色</th>
-                        <th>上/下限</th>
-                        <th>备注</th>
-                        <th>操作</th>
+                        <th><?=$lang['分类']?></th>
+                        <th><?=$lang['产品ID']?></th>
+                        <th><?=$lang['产品名称']?></th>
+                        <th><?=$lang['产品图片']?></th>
+                        <th><?=$lang['单重']?></th>
+                        <th><?=$lang['单价']?></th>
+                        <th><?=$lang['规格']?></th>
+                        <th><?=$lang['颜色']?></th>
+                        <th><?=$lang['上/下限']?></th>
+                        <th><?=$lang['备注']?></th>
+                        <th><?=$lang['操作']?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -118,12 +129,12 @@ include('../header.php');
                                         <td>{$rows['color']}</td>
                                         <td>{$rows['max']} / {$rows['min']}</td>
                                         <td>{$rows['note']}</td>
-                                        <td><a href='alter.php?id={$rows['id']}' class='btn btn-primary'>修改</a> <a href='del.php?id={$rows['id']}&name={$rows['name']}&cname={$cname['name']}' class='btn btn-primary'>删除</a></td>
+                                        <td><a href='alter.php?id={$rows['id']}' class='btn btn-primary'>{$lang['修改']}</a> <a href='del.php?id={$rows['id']}&name={$rows['name']}&cname={$cname['name']}' class='btn btn-primary'>{$lang['删除']}</a></td>
                                     </tr>
                                 ";
                             }
                         } else {
-                            echo "<td colspan='12'>没有记录！</td>";
+                            echo "<td colspan='12'>{$lang['没有记录']}！</td>";
                         }
                         
                         

@@ -32,8 +32,8 @@ include('../header.php');
         <div class="span10 pull-right right">
             <!-- 面包屑｛ -->
             <ul class="breadcrumb clearfix">
-                <li><a href="#"><i class="icon-home"> </i> 首页</a><span class="divider"> / </span></li>
-                <li><a href="#">用户管理</a><span class="divider"> / </span></li>
+                <li><a href="../index.php"><i class="icon-home"> </i> 首页</a><span class="divider"> / </span></li>
+                <li><a href="index.php">用户管理</a><span class="divider"> / </span></li>
                 <li>实名认证</li>
             </ul>
             <!-- 面包屑｝ -->

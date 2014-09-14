@@ -1,4 +1,16 @@
 <?php 
+session_start();
+
+// 判断网站语言
+if ($_GET['lang']) {
+    $_SESSION['lang'] = $_GET['lang'];
+} else {
+    if (!isset($_SESSION['lang'])) {
+        $_SESSION['lang'] = 'zh-cn';
+    }
+}
+include("../lang/lang.php");
+
 header("content-type:text/html;charset=utf8");
 session_start();
 include('../class/config.inc.php');
@@ -29,9 +41,9 @@ if ($shelf_arr) {
             $insert_log['content'] = "{$_SESSION['username']}{$content_log}<br>已进入审核";
             $log->insert($insert_log);
 
-            echo "<script>alert('操作成功！请通知管理员审核！');</script>";
+            echo "<script>alert('{$lang['']}操作成功！请通知管理员审核！');</script>";
         } else {
-            echo "<script>alert('操作失败！');</script>";
+            echo "<script>alert('{$lang['']}操作失败！');</script>";
         }
     }
 }
@@ -42,7 +54,7 @@ if ($shelf_arr) {
 <html>
 <head>
 <meta charset="UTF-8">
-<title>购买货架</title>
+<title><?=$lang['购买货架']?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -72,9 +84,9 @@ include('../header.php');
         <div class="span10 pull-right right">
             <!-- 面包屑｛ -->
             <ul class="breadcrumb clearfix">
-                <li><a href="#"><i class="icon-home"> </i> 首页</a><span class="divider"> / </span></li>
-                <li><a href="#">我的货架</a><span class="divider"> / </span></li>
-                <li>购买货架</li>
+                <li><a href="../index.php"><i class="icon-home"> </i> <?=$lang['首页']?></a><span class="divider"> / </span></li>
+                <li><a href="index.php"><?=$lang['我的货架']?></a><span class="divider"> / </span></li>
+                <li><?=$lang['购买货架']?></li>
             </ul>
             <!-- 面包屑｝ -->
 
@@ -87,7 +99,7 @@ $storage_info = $storage->field('*')->select();
             <!-- 购买货架｛ -->
             <form id="buy" action="buy.php" method="post">
             <div class="btn-group">
-                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">选择仓库 <span class="caret"></span></a>
+                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><?=$lang['选择仓库']?> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     
                 <?php 
@@ -117,7 +129,7 @@ $storage_info = $storage->field('*')->select();
                     }
                     $storage_select = $storage->where("id={$stid}")->field('name')->select();
                     echo "
-                        <p><span class='label label-warning'>{$storage_select[0]['name']}</span> 可选货架：<span class='label label-info'>为了方便您管理，建议从前往后选择连续的货架。</span></p>
+                        <p><span class='label label-warning'>{$storage_select[0]['name']}</span> {$lang['可选货架']}：<span class='label label-info'>{$lang['为了方便您管理，建议从前往后选择连续的货架。']}</span></p>
                     ";
                     if (!empty($shid_arr)) {
                         foreach ($shid_arr as $key => $value) {
@@ -126,7 +138,7 @@ $storage_info = $storage->field('*')->select();
                             ";
                         }
                     }else{
-                        echo "没有记录！";
+                        echo "{$lang['没有记录']}！";
                     }
                     
 
@@ -134,7 +146,7 @@ $storage_info = $storage->field('*')->select();
 
                 <input type="hidden" name="stid" value="<?=$stid?>">
                 <br><br>
-                <input type="submit" name="submit" value="确认购买" class="btn btn-primary">
+                <input type="submit" name="submit" value="<?=$lang['确认购买']?>" class="btn btn-primary">
             </form>
 
             <!-- 购买货架｝ -->

@@ -1,5 +1,16 @@
 <?php 
 session_start();
+
+// 判断网站语言
+if ($_GET['lang']) {
+    $_SESSION['lang'] = $_GET['lang'];
+} else {
+    if (!isset($_SESSION['lang'])) {
+        $_SESSION['lang'] = 'zh-cn';
+    }
+}
+include("../lang/lang.php");
+
 include('../class/config.inc.php');
 include('../class/model.class.php');
 
@@ -9,7 +20,7 @@ include('../class/model.class.php');
 <html>
 <head>
 <meta charset="UTF-8">
-<title>产品入库</title>
+<title><?=$lang['产品入库']?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -40,9 +51,9 @@ include('../header.php');
         <div class="span10 pull-right right">
             <!-- 面包屑｛ -->
             <ul class="breadcrumb clearfix">
-                <li><a href="#"><i class="icon-home"> </i> 首页</a><span class="divider"> / </span></li>
-                <li><a href="#">库存管理</a><span class="divider"> / </span></li>
-                <li>产品入库</li>
+                <li><a href="../index.php"><i class="icon-home"> </i> <?=$lang['首页']?></a><span class="divider"> / </span></li>
+                <li><a href="index.php"><?=$lang['库存管理']?></a><span class="divider"> / </span></li>
+                <li><?=$lang['产品入库']?></li>
             </ul>
             <!-- 面包屑｝ -->
 
@@ -53,34 +64,30 @@ include('../header.php');
             </div>
             <!-- 提示信息｝-->
 
-            <!-- 剩余货位｛ -->
-            <p class="lead">剩余货位：12个</p>
-            <!-- 剩余货位｝ -->
-
             <!-- 入库表单｛ -->
             <div class="container-fluid store">
                 <form id="form_in" class="form-horizontal">
-                    <h2>产品入库</h2>
+                    <h2><?=$lang['产品入库']?></h2>
                     <div>
                         <div class="span4">
                             <div class="control-group">
-                                <label for="express" class="control-label">物流方式</label>
+                                <label for="express" class="control-label"><?=$lang['物流方式']?></label>
                                 <div class="controls">
-                                    <input type="text" id="express" name="express" placeholder="请输入物流方式" required autofocus>
+                                    <input type="text" id="express" name="express" placeholder="<?=$lang['物流方式']?>" required autofocus>
                                 </div>    
                             </div>
                             <div class="control-group">
-                                <label for="expressid" class="control-label">快递单号</label>
+                                <label for="expressid" class="control-label"><?=$lang['快递单号']?></label>
                                 <div class="controls">
-                                    <input type="text" id="expressid" name="expressid" placeholder="请输入快递单号" required>
+                                    <input type="text" id="expressid" name="expressid" placeholder="<?=$lang['快递单号']?>" required>
                                 </div>    
                             </div>
                         </div>
                         <div class="span8" id="addcon">
                             <div class="store-bar">
-                                <a href="javascript:;" id="submit" class="btn btn-primary pull-right">入库</a>
+                                <a href="javascript:;" id="submit" class="btn btn-primary pull-right"><?=$lang['入库']?></a>
                                 <div class="btn-group">
-                                    <a href="javascript:;" class="btn btn-primary" id="addbtn">添加产品</a>
+                                    <a href="javascript:;" class="btn btn-primary" id="addbtn"><?=$lang['添加产品']?></a>
                                 </div>
                             </div>
                         </div>

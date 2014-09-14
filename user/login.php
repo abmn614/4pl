@@ -3,14 +3,16 @@ header("content-type:text/html;charset=utf8");
 include('../class/config.inc.php');
 include('../class/model.class.php');
 session_start();
+
 // 判断网站语言
 if ($_GET['lang']) {
     $_SESSION['lang'] = $_GET['lang'];
 } else {
-    $_SESSION['lang'] = 'zh-cn';
+    if (!isset($_SESSION['lang'])) {
+        $_SESSION['lang'] = 'zh-cn';
+    }
 }
 include("../lang/lang.php");
-
 
 // 接收用户名和密码
 $username = $_POST['uname'];
@@ -38,7 +40,7 @@ if (!empty($_POST)) {
                 $insert_log['content'] = "用户登录，共登录".$login_count."次,<br>IP：".$_SERVER["REMOTE_ADDR"];
                 $log->insert($insert_log);
 
-                echo "<script>alert('登录成功！');</script>";
+                echo "<script>alert('{$lang[登录成功]}！');</script>";
                 $_SESSION['userid'] = $userlogin[0]['id'];
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $userlogin[0]['role'];
@@ -48,13 +50,13 @@ if (!empty($_POST)) {
                     echo "<script>location='../index.php?uid={$userlogin[0]['id']}';</script>"; //则跳转到用户个人首页页
                 }
             }else{
-                echo "<script>alert('密码错误！');</script>";
+                echo "<script>alert('{$lang[密码错误]}！');</script>";
             }
         }else{
-            echo "<script>alert('用户名错误！');</script>";
+            echo "<script>alert('{$lang[用户名错误]}！');</script>";
         }
     }else{
-        echo "<script>alert('验证码错误！');location='login.php';</script>";
+        echo "<script>alert('{$lang[验证码错误]}！');location='login.php';</script>";
     }
 }
 
@@ -74,12 +76,31 @@ if (!empty($_POST)) {
 <![endif]-->
 </head>
 <body>
+<!-- 语言切换 -->
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.php" class="brand">第四方仓储管理系统</a>
+            <ul class='nav pull-right'>
+                <li class='dropdown'>
+                    <a href='#' class='dropdown-toggle' data-toggle='dropdown'><?=$lang['语言']?><span class='caret'></span></a>
+                    <ul class='dropdown-menu' role='menu'>
+                        <li><a href='?lang=zh-cn'>中文</a></li>
+                        <li><a href='?lang=en'>English</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 <!-- 用户登录｛ -->
 <div class="container" style="margin-top: 100px;">
-    <div class="btn-group center">
-        <a href="?lang=zh-cn" class="btn">中文</a>
-        <a href="?lang=en" class="btn">English</a>
-    </div>
     <form class="form-signin" action="login.php" method="post">
         <p><span class="pull-right"><a href="reg.php"><?=$lang['注册']?> <i class="icon-circle-arrow-right"></i></a></span><span><?=$lang['登录']?></span></p>
         <input type="text" name="uname" class="input-block-level" placeholder="<?=$lang['请输入用户名']?>" value="<?= $_COOKIE['username']?>" required autofocus>

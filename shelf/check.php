@@ -40,8 +40,8 @@ include('../header.php');
         <div class="span10 pull-right right">
             <!-- 面包屑｛ -->
             <ul class="breadcrumb clearfix">
-                <li><a href="#"><i class="icon-home"> </i> 首页</a><span class="divider"> / </span></li>
-                <li><a href="#">我的货架</a><span class="divider"> / </span></li>
+                <li><a href="../index.php"><i class="icon-home"> </i> 首页</a><span class="divider"> / </span></li>
+                <li><a href="index.php">我的货架</a><span class="divider"> / </span></li>
                 <li>审核货架</li>
             </ul>
             <!-- 面包屑｝ -->

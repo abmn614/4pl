@@ -1,14 +1,16 @@
 <?php 
 session_start();
+
 // 判断网站语言
-if (!isset($_SESSION['lang'])) {
-    if ($_GET['lang']) {
-        $_SESSION['lang'] = $_GET['lang'];
-    } else {
+if ($_GET['lang']) {
+    $_SESSION['lang'] = $_GET['lang'];
+} else {
+    if (!isset($_SESSION['lang'])) {
         $_SESSION['lang'] = 'zh-cn';
     }
-} 
+}
 include("../lang/lang.php");
+
 include('../class/config.inc.php');
 include('../class/model.class.php');
 include('../class/page.class.php');
@@ -55,7 +57,7 @@ if ($_SESSION['role'] != 1) { // 不是管理员
         <div class="span10 pull-right right">
             <!-- 面包屑｛ -->
             <ul class="breadcrumb clearfix">
-                <li><a href="#"><i class="icon-home"> </i> 首页</a><span class="divider"> / </span></li>
+                <li><a href="../index.php"><i class="icon-home"> </i> 首页</a><span class="divider"> / </span></li>
                 <li>用户管理</li>
             </ul>
             <!-- 面包屑｝ -->
@@ -72,7 +74,7 @@ if ($_SESSION['role'] != 1) { // 不是管理员
             
              ?>
 
-            <p>注册用户：<?=$tot?> 个人用户：<?=$personal?>（<?=$personal_v?>人已认证） 企业用户：<?=$company?>（<?=$company_v?>家已认证）</p>
+            <p>注册用户：<?=$tot?> 个人用户：<?=$personal?>（<?=$personal_v?>已认证） 企业用户：<?=$company?>（<?=$company_v?>已认证）</p>
             <!-- 用户信息｝ -->
 
             <!-- 用户列表｛ -->

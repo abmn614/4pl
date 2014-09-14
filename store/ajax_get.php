@@ -3,6 +3,16 @@ include('../class/config.inc.php');
 include('../class/model.class.php');
 session_start();
 
+// 判断网站语言
+if ($_GET['lang']) {
+    $_SESSION['lang'] = $_GET['lang'];
+} else {
+    if (!isset($_SESSION['lang'])) {
+        $_SESSION['lang'] = 'zh-cn';
+    }
+}
+include("../lang/lang.php");
+
 $product = M('product');
 $pclass = M('pclass');
 $in = M('stockin');
@@ -14,7 +24,7 @@ switch ($_GET['action']) {
         echo "
             <div class='store-list'>
                 <select name='pid[]' class='span7' required>
-                    <option value=''>选择产品</option>
+                    <option value=''>{$lang['选择产品']}</option>
         ";
         $product_info = $product->order('cid')->field('*')->select();
         foreach ($product_info as $rows) {
@@ -26,7 +36,7 @@ switch ($_GET['action']) {
         }
         echo "
                 </select>
-                <input type='text' name='num[]' placeholder='数量' required>
+                <input type='text' name='num[]' placeholder='{$lang['数量']}' required>
                 <a href='' class='btn btn-primary' data-dismiss='alert'>&times;</a>
             </div>
         ";
@@ -40,18 +50,18 @@ switch ($_GET['action']) {
                 $pid_null = in_array('', $_POST['pid']);
                 $num_null = in_array('', $_POST['num']);
             } else {
-                echo "请先添加产品！\n";
+                echo "{$lang['请先添加产品']}！\n";
             }
             
             if (in_array('', $_POST) || $pid_null || $num_null) {
-                echo "请检查是否有还项目没有填写！";
+                echo "{$lang['请检查是否有还项目没有填写']}！";
             } else {
                 // 检测是否重复选择了产品
                 $pid_count = array_count_values($_POST['pid']);
                 foreach ($pid_count as $key => $value) {
                     if ($pid_count[$key] > 1) { // 重复选择了产品
                         $product_name = $product->where("id={$key}")->find();
-                        echo "【{$product_name['name']}】重复选择了【{$pid_count[$key]}】次！\n";
+                        echo "【{$product_name['name']}】{$lang['重复选择了']}【{$pid_count[$key]}】{$lang['次']}！\n";
                         $once[] = false;
                     } else { // 保证每个产品只选择一次
                         $once[] = true;
@@ -85,14 +95,14 @@ switch ($_GET['action']) {
                         $insert_log['content'] = "{$_SESSION['username']}入库了产品：<br>{$content_log}<br>入库的产品和数量分别是：<br>{$product_in}";
                         $log->insert($insert_log);
 
-                        echo "操作成功！等待管理员入库！";
+                        echo "{$lang['操作成功，等待管理员审核']}！";
                     } else {
-                        echo "操作失败！请联系仓库管理员！";
+                        echo "{$lang['操作失败']}！";
                     }
                 }
             }
         }else{
-            echo "请先选择产品";
+            echo "{$lang['请先选择产品']}";
         }
             
         break;
@@ -102,7 +112,7 @@ switch ($_GET['action']) {
         echo "
             <div class='store-list'>
                 <select name='pid[]' class='span7' required>
-                    <option value=''>选择产品</option>
+                    <option value=''>{$lang['选择产品']}</option>
         ";
 
         // 计算每个用户每个产品的存货数量｛
@@ -146,7 +156,7 @@ switch ($_GET['action']) {
             }
             echo "
                     </select>
-                    <input type='text' name='num[]' placeholder='数量' required>
+                    <input type='text' name='num[]' placeholder='{$lang['数量']}' required>
                     <a href='' class='btn btn-primary' data-dismiss='alert'>&times;</a>
                 </div>
             ";
@@ -162,7 +172,7 @@ switch ($_GET['action']) {
                 }
             }
         } else {
-            echo "<option value=''>没有库存或未审核</option>";
+            echo "<option value=''>{$lang['没有库存或未审核']}</option>";
         }
         
         
@@ -176,18 +186,18 @@ switch ($_GET['action']) {
                 $pid_null = in_array('', $_POST['pid']); // 如果存在返回真
                 $num_null = in_array('', $_POST['num']);
             } else {
-                echo "请先添加产品！\n";
+                echo "{$lang['请先添加产品']}！\n";
             }
             
             if (in_array('', $_POST) || $pid_null || $num_null) { // 只要有一个为真就证明还有东西没填
-                echo "请检查是否有还项目没有填写！";
+                echo "{$lang['请检查是否有还项目没有填写']}！";
             } else {
                 // 检测是否重复选择了产品
                 $pid_count = array_count_values($_POST['pid']);
                 foreach ($pid_count as $key => $value) {
                     if ($pid_count[$key] > 1) { // 重复选择了产品
                         $product_name = $product->where("id={$key}")->find();
-                        echo "【{$product_name['name']}】重复选择了【{$pid_count[$key]}】次！\n";
+                        echo "【{$product_name['name']}】{$lang['重复选择了']}【{$pid_count[$key]}】{$lang['次']}！\n";
                         $once[] = false;
                     } else { // 保证每个产品只选择一次
                         $once[] = true;
@@ -208,7 +218,7 @@ switch ($_GET['action']) {
                         foreach ($overflow as $key => $value) {
                             $overflow_num .= '【'.$overflow[$key].'】';
                         }
-                        echo "第{$overflow_num}个产品的数量超过了库存数量！";
+                        echo "{$lang['第']}{$overflow_num}{$lang['个产品的数量超过了库存数量']}！";
                     } else { // 没有超过库存量
                         $tot = count($_POST['pid']); // 本次出库了多少产品
                         $out = M('stockout');
@@ -251,21 +261,16 @@ switch ($_GET['action']) {
                             $insert_log['content'] = "{$_SESSION['username']}出库了产品：<br>{$content_log}<br>出库的产品和数量分别是：<br>{$product_out}";
                             $log->insert($insert_log);
 
-                            echo "操作成功！等待管理员进行出库审核！";
+                            echo "{$lang['操作成功，等待管理员审核']}！";
                         } else {
-                            echo "操作失败！请联系管理员！";
+                            echo "{$lang['操作失败']}！";
                         }
                     }
                 }
             }
         }else{
-            echo "请先添加产品！";
+            echo "{$lang['请先添加产品']}！";
         }
-
-        // var_dump($_POST);
-        // echo "<pre>";
-        // print_r($_POST);
-        // echo "</pre>";
 
         break;
 

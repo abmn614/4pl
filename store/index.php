@@ -1,5 +1,16 @@
 <?php 
 session_start();
+
+// 判断网站语言
+if ($_GET['lang']) {
+    $_SESSION['lang'] = $_GET['lang'];
+} else {
+    if (!isset($_SESSION['lang'])) {
+        $_SESSION['lang'] = 'zh-cn';
+    }
+}
+include("../lang/lang.php");
+
 include('../class/config.inc.php');
 include('../class/model.class.php');
 include('../class/page.class.php');
@@ -10,7 +21,7 @@ include('../class/page.class.php');
 <html>
 <head>
 <meta charset="UTF-8">
-<title>库存管理</title>
+<title><?=$lang['库存管理']?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -41,8 +52,8 @@ include('../header.php');
         <div class="span10 pull-right right">
             <!-- 面包屑｛ -->
             <ul class="breadcrumb clearfix">
-                <li><a href="#"><i class="icon-home"> </i> 首页</a><span class="divider"> / </span></li>
-                <li>入库清单</li>
+                <li><a href="../index.php"><i class="icon-home"> </i> <?=$lang['首页']?></a><span class="divider"> / </span></li>
+                <li><?=$lang['入库清单']?></li>
             </ul>
             <!-- 面包屑｝ -->
 
@@ -53,11 +64,11 @@ include('../header.php');
             <!-- 产品一级分类｛ -->
             <p>
                 <span class="pull-left">
-                    共计：<?=$in->count();?>次入库
+                    <?=$lang['共计']?>：<?=$in->count();?><?=$lang['入库']?>
                 </span>
                 <span class="pull-right">
-                    <a href="in.php" class="btn btn-primary">入库</a>
-                    <a href="out.php" class="btn btn-primary">出库</a>
+                    <a href="in.php" class="btn btn-primary"><?=$lang['入库']?></a>
+                    <a href="out.php" class="btn btn-primary"><?=$lang['出库']?></a>
                 </span>
             </p>
             <br><br>
@@ -68,12 +79,12 @@ include('../header.php');
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>用户名</th>
-                        <th>快递 / 单号</th>
-                        <th>产品 / 数量 / 仓库</th>
-                        <th>说明</th>
-                        <th>审核状态</th>
-                        <th>时间</th>
+                        <th><?=$lang['用户名']?></th>
+                        <th><?=$lang['快递 / 单号']?></th>
+                        <th><?=$lang['产品 / 数量 / 仓库']?></th>
+                        <th><?=$lang['备注']?></th>
+                        <th><?=$lang['审核状态']?></th>
+                        <th><?=$lang['时间']?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -117,19 +128,19 @@ include('../header.php');
 
                             switch ($rows['checked']) {
                                 case 1:
-                                    echo "<td><span class='text-error'>未审核</span></td>";
+                                    echo "<td><span class='text-error'>{$lang['未审核']}</span></td>";
                                     break;
 
                                 case 2:
-                                    echo "<td>已审核</td>";
+                                    echo "<td>{$lang['已审核']}</td>";
                                     break;
 
                                 case 3:
-                                    echo "<td>审核未通过</td>";
+                                    echo "<td>{$lang['审核未通过']}</td>";
                                     break;
 
                                 default:
-                                    echo "<td>未知</td>";
+                                    echo "<td>{$lang['未知']}</td>";
                                     break;
                             }
                             

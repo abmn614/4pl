@@ -1,5 +1,16 @@
 <?php 
 session_start();
+
+// 判断网站语言
+if ($_GET['lang']) {
+    $_SESSION['lang'] = $_GET['lang'];
+} else {
+    if (!isset($_SESSION['lang'])) {
+        $_SESSION['lang'] = 'zh-cn';
+    }
+}
+include("../lang/lang.php");
+
 include('../class/config.inc.php');
 include('../class/model.class.php');
 
@@ -9,7 +20,7 @@ include('../class/model.class.php');
 <html>
 <head>
 <meta charset="UTF-8">
-<title>产品出库</title>
+<title><?=$lang['产品出库']?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -40,9 +51,9 @@ include('../header.php');
         <div class="span10 pull-right right">
             <!-- 面包屑｛ -->
             <ul class="breadcrumb clearfix">
-                <li><a href="#"><i class="icon-home"> </i> 首页</a><span class="divider"> / </span></li>
-                <li><a href="#">库存管理</a><span class="divider"> / </span></li>
-                <li>产品出库</li>
+                <li><a href="../index.php"><i class="icon-home"> </i> <?=$lang['首页']?></a><span class="divider"> / </span></li>
+                <li><a href="index.php"><?=$lang['库存管理']?></a><span class="divider"> / </span></li>
+                <li><?=$lang['产品出库']?></li>
             </ul>
             <!-- 面包屑｝ -->
             
@@ -56,81 +67,81 @@ include('../header.php');
             <!-- 出库表单｛ -->
             <div class="container-fluid store">
                 <form id="form_out" class="form-horizontal">
-                    <h2>产品出库</h2>
+                    <h2><?=$lang['产品出库']?></h2>
                     <div>
                         <div class="span4">
                             <div class="control-group">
-                                <label for="order" class="control-label">订单号</label>
+                                <label for="order" class="control-label"><?=$lang['订单号']?></label>
                                 <div class="controls">
-                                    <input type="text" id="order" name="orderid" placehoder="请输入订单号" required autofocus>
+                                    <input type="text" id="order" name="orderid" placehoder="<?=$lang['订单号']?>" required autofocus>
                                 </div>    
                             </div>
                             <div class="control-group">
-                                <label for="name" class="control-label">姓名</label>
+                                <label for="name" class="control-label"><?=$lang['姓名']?></label>
                                 <div class="controls">
-                                    <input type="text" id="name" name="name" placehoder="请输入姓名" required>
+                                    <input type="text" id="name" name="name" placehoder="<?=$lang['姓名']?>" required>
                                 </div>    
                             </div>
                             <div class="control-group">
-                                <label for="nation" class="control-label">国家</label>
+                                <label for="nation" class="control-label"><?=$lang['国家']?></label>
                                 <div class="controls">
-                                    <input type="text" id="nation" name="nation" placehoder="请输入国家" required>
+                                    <input type="text" id="nation" name="nation" placehoder="<?=$lang['国家']?>" required>
                                 </div>    
                             </div>
                             <div class="control-group">
-                                <label for="state" class="control-label">州/省</label>
+                                <label for="state" class="control-label"><?=$lang['州/省']?></label>
                                 <div class="controls">
-                                    <input type="text" id="state" name="state" placehoder="请输入州/省" required>
+                                    <input type="text" id="state" name="state" placehoder="<?=$lang['州/省']?>" required>
                                 </div>    
                             </div>
                             <div class="control-group">
-                                <label for="city" class="control-label">市名</label>
+                                <label for="city" class="control-label"><?=$lang['城市']?></label>
                                 <div class="controls">
-                                    <input type="text" id="city" name="city" placehoder="请输入市名" required>
+                                    <input type="text" id="city" name="city" placehoder="<?=$lang['城市']?>" required>
                                 </div>    
                             </div>
                             <div class="control-group">
-                                <label for="adress" class="control-label">地址</label>
+                                <label for="adress" class="control-label"><?=$lang['地址']?></label>
                                 <div class="controls">
-                                    <input type="text" id="adress" name="adress" placehoder="请输入地址" required>
+                                    <input type="text" id="adress" name="adress" placehoder="<?=$lang['地址']?>" required>
                                 </div>    
                             </div>
                             <div class="control-group">
-                                <label for="zcode" class="control-label">邮编</label>
+                                <label for="zcode" class="control-label"><?=$lang['邮编']?></label>
                                 <div class="controls">
-                                    <input type="text" id="zcode" name="zcode" placehoder="请输入邮编" required>
+                                    <input type="text" id="zcode" name="zcode" placehoder="<?=$lang['邮编']?>" required>
                                 </div>    
                             </div>
                             <div class="control-group">
-                                <label for="tel" class="control-label">座机</label>
+                                <label for="tel" class="control-label"><?=$lang['座机']?></label>
                                 <div class="controls">
-                                    <input type="text" id="tel" name="tel" placehoder="请输入座机" required>
+                                    <input type="text" id="tel" name="tel" placehoder="<?=$lang['座机']?>" required>
                                 </div>    
                             </div>
                             <div class="control-group">
-                                <label for="cellphone" class="control-label">手机</label>
+                                <label for="cellphone" class="control-label"><?=$lang['手机']?></label>
                                 <div class="controls">
-                                    <input type="text" id="cellphone" name="cellphone" placehoder="请输入手机" required>
+                                    <input type="text" id="cellphone" name="cellphone" placehoder="<?=$lang['手机']?>" required>
                                 </div>    
                             </div>
                             <div class="control-group">
-                                <label for="express" class="control-label">物流方式</label>
+                                <label for="express" class="control-label"><?=$lang['物流方式']?></label>
                                 <div class="controls">
-                                    <input type="text" id="express" name="express" placehoder="请输入物流方式" required>
+                                    <input type="text" id="express" name="express" placehoder="<?=$lang['物流方式']?>" required>
                                 </div>    
                             </div>
                             <div class="control-group">
-                                <label for="expressid" class="control-label">快递单号</label>
+                                <label for="expressid" class="control-label"><?=$lang['快递单号']?></label>
                                 <div class="controls">
-                                    <input type="text" id="expressid" name="expressid" placehoder="请输入快递单号" required>
+                                    <input type="text" id="expressid" name="expressid" placehoder="<?=$lang['快递单号']?>" required>
                                 </div>    
                             </div>
                         </div>
                         <div class="span8" id="addcon">
                             <div class="store-bar">
-                                <a href="javascript:;" id="submit" class="btn btn-primary pull-right">出库</a>
+                                <a href="javascript:;" id="submit" class="btn btn-primary pull-right"><?=$lang['出库']?></a>
                                 <div class="btn-group">
-                                    <a href="javascript:;" class="btn btn-primary" id="addbtn">添加产品</a>
+                                    <a href="javascript:;" class="btn btn-primary" id="addbtn"><?=$lang['添加产品']?></a>
                                 </div>
                             </div>
                         </div>
